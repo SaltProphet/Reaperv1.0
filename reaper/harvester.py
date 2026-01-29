@@ -1,4 +1,5 @@
 import os
+import sys
 from typing import List, Dict, Any
 import praw
 
@@ -12,6 +13,10 @@ class RedditHarvester:
     ]
 
     def __init__(self):
+        if not os.environ.get("REDDIT_CLIENT_ID") or not os.environ.get("REDDIT_CLIENT_SECRET"):
+            print("Error: REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET environment variables are required")
+            sys.exit(1)
+        
         self.reddit = praw.Reddit(
             client_id=os.environ.get("REDDIT_CLIENT_ID"),
             client_secret=os.environ.get("REDDIT_CLIENT_SECRET"),
@@ -20,11 +25,16 @@ class RedditHarvester:
 
     def harvest(self, subreddit: str, limit: int = 100) -> List[Dict[str, Any]]:
         results = []
+        seen_ids = set()
         sub = self.reddit.subreddit(subreddit)
         
         for query in self.SEARCH_QUERIES:
             try:
                 for submission in sub.search(query, limit=limit // len(self.SEARCH_QUERIES)):
+                    if submission.id in seen_ids:
+                        continue
+                    seen_ids.add(submission.id)
+                    
                     thread_data = {
                         'id': submission.id,
                         'title': submission.title,

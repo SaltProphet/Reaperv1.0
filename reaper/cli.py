@@ -1,6 +1,4 @@
-import sys
 import argparse
-from typing import Optional
 from reaper.database import Database
 from reaper.harvester import RedditHarvester
 

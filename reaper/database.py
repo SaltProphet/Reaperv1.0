@@ -1,6 +1,5 @@
 import sqlite3
 from typing import List, Dict, Any
-from pathlib import Path
 
 
 class Database:
@@ -28,7 +27,7 @@ class Database:
     def insert_thread(self, thread_data: Dict[str, Any]) -> bool:
         try:
             with sqlite3.connect(self.db_path) as conn:
-                conn.execute("""
+                cursor = conn.execute("""
                     INSERT OR IGNORE INTO threads 
                     (id, title, subreddit, author, score, url, created_utc, num_comments, selftext)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -44,7 +43,7 @@ class Database:
                     thread_data['selftext']
                 ))
                 conn.commit()
-                return True
+                return cursor.rowcount > 0
         except Exception:
             return False
 
