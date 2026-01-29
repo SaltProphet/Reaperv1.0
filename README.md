@@ -1,55 +1,12 @@
 # REAPER v2
 
-**REAPER** - Dual-purpose repository containing both the Python CLI for Reddit market research and the Next.js API Latency Tracker.
-
----
-
-## 🐍 Python CLI - Reddit Market Research
-
-Python CLI for Reddit market research. Harvests pain point threads and generates insights.
-
-### Installation
-
-```bash
-pip install -e .
-```
-
-### Configuration
-
-Set environment variables for Reddit API:
-
-```bash
-export REDDIT_CLIENT_ID=your_client_id
-export REDDIT_CLIENT_SECRET=your_client_secret
-export REDDIT_USER_AGENT=REAPER/0.1.0
-```
-
-### Usage
-
-#### Harvest threads
-
-```bash
-reaper harvest --sub entrepreneurship --limit 100
-```
-
-#### Generate report
-
-```bash
-reaper report
-```
-
-### Search Keywords
-
-- "is there a tool"
-- "tired of manually"
-- "pricing is insane"
-- "alternative to"
-
----
-
-## 🚀 Next.js - API Latency Tracker
+**REAPER** - API Latency Tracker
 
 A modern Next.js 15 application for tracking and monitoring API latencies in real-time.
+
+---
+
+## 🚀 API Latency Tracker (Next.js)
 
 ### Tech Stack
 
@@ -103,7 +60,6 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 │       ├── server.ts    # Server client (with async cookies)
 │       └── middleware.ts # Auth session management
 ├── middleware.ts        # Next.js middleware (auth token refresh)
-├── reaper/              # Python CLI modules
 ├── next.config.ts       # Next.js configuration
 └── tsconfig.json        # TypeScript configuration
 ```
@@ -124,13 +80,7 @@ The project uses `@supabase/ssr` for proper cookie-based authentication in Next.
 - **Server Client** (`lib/supabase/server.ts`): For server components (uses `await cookies()`)
 - **Middleware** (`middleware.ts`): Automatically refreshes auth tokens using the `updateSession` pattern
 
----
-
-## 📝 Documentation
-
-For detailed usage of the Python CLI, see [USAGE.md](USAGE.md).
-
-## Phase 1 Complete ✅
+### Phase 1 Complete ✅
 
 Next.js Infrastructure is ready:
 - ✅ Next.js 15 with App Router and ESM
@@ -139,8 +89,30 @@ Next.js Infrastructure is ready:
 - ✅ Proper cookie-based auth pattern
 - ✅ Build and dev server working
 
-## Next Steps
+### Next Steps
 
 - Phase 2: Database schema and API routes
 - Phase 3: UI components and dashboards
 - Phase 4: API latency tracking implementation
+
+---
+
+## 🐍 Python CLI - Reddit Market Research
+
+This repository also contains a Python CLI tool for Reddit market research. For detailed usage, see [USAGE.md](USAGE.md).
+
+### Quick Start
+
+```bash
+# Install
+pip install -e .
+
+# Configure
+export REDDIT_CLIENT_ID=your_client_id
+export REDDIT_CLIENT_SECRET=your_client_secret
+export REDDIT_USER_AGENT=REAPER/0.1.0
+
+# Use
+reaper harvest --sub entrepreneurship --limit 100
+reaper report
+```
