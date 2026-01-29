@@ -25,6 +25,10 @@ wheels/
 venv/
 env/
 ENV/
+venv*/
+env*/
+lib/python*/
+lib64/python*/
 
 # Database
 *.db
@@ -44,7 +48,6 @@ htmlcov/
 .yarn/install-state.gz
 /.next/
 /out/
-lib/
 
 # Production
 /build
